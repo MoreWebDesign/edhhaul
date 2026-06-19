@@ -248,9 +248,9 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
 .foot-phone{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;color:var(--gold);text-decoration:none;display:block}
 .foot-email{font-size:13px;color:rgba(255,255,255,.45);margin-top:3px;text-decoration:none;display:block}
 .foot-social{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
-.foot-soc-btn{width:29px;height:29px;border-radius:5px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:background .15s;text-decoration:none}
-.foot-soc-btn:hover{background:rgba(245,168,0,.2)}
-.foot-soc-btn svg{width:13px;height:13px;fill:rgba(255,255,255,.6)}
+.foot-soc-btn{width:29px;height:29px;border-radius:5px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;text-decoration:none}
+.foot-soc-btn:hover{background:rgba(245,168,0,.2);color:#fff}
+.foot-soc-btn svg{width:13px;height:13px}
 .foot-col h4{font-size:11px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:11px}
 .foot-col ul{list-style:none}
 .foot-col ul li{margin-bottom:7px}
@@ -261,9 +261,19 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
 .foot-legal a{color:rgba(255,255,255,.3);text-decoration:none;font-size:12px}
 .foot-legal a:hover{color:rgba(255,255,255,.6)}
 
+/* ── Agency credit ── */
+.foot-credit{text-align:center;padding:14px 0 2px;border-top:1px solid rgba(255,255,255,.06)}
+.foot-credit a{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.foot-credit a:hover{color:var(--gold-light)}
+.foot-credit strong{font-weight:600;color:rgba(255,255,255,.62);transition:color .2s}
+.foot-credit a:hover strong{color:var(--gold)}
+.foot-credit .robot{width:18px;height:18px;flex-shrink:0}
+.foot-credit a:hover .robot{animation:robot-bob .6s ease}
+@keyframes robot-bob{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-3px) rotate(-7deg)}65%{transform:translateY(0) rotate(5deg)}}
+
 /* ── Cookie banner ── */
 .cookie-banner{position:fixed;bottom:16px;left:16px;right:16px;max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 48px rgba(18,39,80,.25);padding:18px 20px;z-index:1000;display:flex;gap:14px;align-items:flex-start}
-.cookie-banner.hidden{display:none}
+.cookie-banner.hidden{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px)}
 .cookie-icon{font-size:22px;flex-shrink:0}
 .cookie-text{flex:1}
 .cookie-text p{font-size:13px;color:var(--ink);line-height:1.5;margin-bottom:10px}
@@ -290,6 +300,47 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
 .chat-toggle{width:58px;height:58px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;box-shadow:0 6px 20px rgba(245,168,0,.45);display:flex;align-items:center;justify-content:center;transition:transform .15s}
 .chat-toggle:hover{transform:scale(1.05)}
 .chat-toggle svg{width:26px;height:26px;fill:var(--navy-dark)}
+
+/* ── Desktop nav quote CTA ── */
+.nav-cta-desktop{background:var(--cta-green);color:#fff;font-family:'Inter',sans-serif;font-weight:700;font-size:12.5px;border-radius:var(--r);text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;max-width:0;opacity:0;padding:9px 0;margin-left:-20px;pointer-events:none;transition:max-width .3s ease,opacity .25s ease,padding .3s ease,margin-left .3s ease,background .15s ease}
+.nav-cta-desktop.is-visible{max-width:240px;opacity:1;padding:9px 15px;margin-left:0;pointer-events:auto}
+.nav-links a.nav-cta-desktop{color:#fff}
+.nav-cta-desktop:hover{background:var(--cta-green-dark)}
+
+/* ── Social label hides on mobile (icon-only) ── */
+.social-btn .lbl,.sfbtn .lbl{display:inline}
+.cookie-banner{transition:opacity .35s ease,transform .35s ease}
+/* ── Payment band ── */
+.pay-inner{padding:32px 0;text-align:center}
+.pay-inner .eyebrow{color:var(--sky)}
+.pay-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:26px;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:6px}
+.pay-sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+.pay-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pay-chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--border);border-radius:30px;padding:9px 17px;font-size:13px;font-weight:600;color:var(--ink)}
+.pay-chip svg{width:16px;height:16px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+/* ── Promo modal ── */
+.promo-overlay{position:fixed;inset:0;background:rgba(18,39,80,.72);backdrop-filter:blur(3px);z-index:1200;display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .25s ease}
+.promo-overlay.open{display:flex;opacity:1}
+.promo-modal{background:#fff;border-radius:16px;max-width:430px;width:100%;padding:30px 28px 24px;position:relative;box-shadow:0 24px 70px rgba(0,0,0,.4);max-height:92vh;overflow-y:auto;transform:translateY(12px);transition:transform .25s ease}
+.promo-overlay.open .promo-modal{transform:none}
+.promo-close{position:absolute;top:10px;right:13px;background:none;border:none;font-size:24px;line-height:1;color:var(--muted);cursor:pointer;padding:4px}
+.promo-close:hover{color:var(--ink)}
+.promo-badge{display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;letter-spacing:.04em;text-transform:uppercase;padding:4px 14px;border-radius:30px;margin-bottom:12px}
+.promo-modal h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:29px;line-height:1.02;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.promo-modal h3 em{font-style:normal;color:var(--cta-green)}
+.promo-modal>#promoMain>p{font-size:14px;color:var(--muted);line-height:1.55;margin-bottom:16px}
+.promo-form{display:flex;flex-direction:column;gap:9px}
+.promo-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.promo-form input,.promo-form textarea{background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r);padding:10px 13px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;width:100%;outline:none}
+.promo-form input:focus,.promo-form textarea:focus{border-color:var(--sky)}
+.promo-form textarea{resize:vertical;min-height:60px}
+.promo-consent{display:flex;gap:9px;align-items:flex-start;font-size:11px;color:var(--muted);line-height:1.45;text-align:left;cursor:pointer}
+.promo-consent input{width:16px;height:16px;flex-shrink:0;margin-top:1px;accent-color:var(--cta-green)}
+.promo-submit{background:var(--cta-green);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:700;font-size:15px;padding:13px;border-radius:var(--r);cursor:pointer;margin-top:4px;transition:background .15s}
+.promo-submit:hover{background:var(--cta-green-dark)}
+.promo-skip{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;font-family:'Inter',sans-serif}
+.promo-fine{font-size:10.5px;color:var(--muted);text-align:center;margin-top:2px;line-height:1.4}
+.promo-fine a{color:var(--sky)}
 
 /* ══════════════════ RESPONSIVE ══════════════════ */
 @media(max-width:960px){
@@ -332,11 +383,14 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
   .frow{grid-template-columns:1fr}
   .rev-card{flex:0 0 100%}
   .rev-head{flex-direction:column}
-  .foot-top{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr;gap:20px}
   .sec{padding:40px 0}
   .map-frame iframe{height:300px}
   .chat-window{width:calc(100vw - 40px)}
   .cookie-banner{flex-direction:column}
+  .social-btn .lbl,.sfbtn .lbl{display:none}
+  .social-links{gap:9px}
+  .social-follow-inner{gap:9px}
 }
 @media(max-width:400px){
   .svc-grid{grid-template-columns:1fr}
@@ -344,6 +398,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="ic-google" viewBox="0 0 24 24"><path fill="currentColor" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></symbol><symbol id="ic-yelp" viewBox="0 0 24 24"><path fill="currentColor" d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041zm2.86 3.742a.8523.8523 0 0 1-.111.4236c-.074.132-.178.2377-.3115.3172a.8428.8428 0 0 1-.4385.119.847.847 0 0 1-.4373-.1179.8526.8526 0 0 1-.3125-.3171.8548.8548 0 0 1-.111-.4248c0-.1526.038-.2958.1143-.4294a.8405.8405 0 0 1 .315-.3159.849.849 0 0 1 .4315-.1156.8514.8514 0 0 1 .4294.1144.84.84 0 0 1 .316.3148.8494.8494 0 0 1 .1156.4317zm-.1202 0c0-.1328-.0332-.256-.0996-.3698s-.1564-.2038-.2702-.2702a.7125.7125 0 0 0-.371-.1007.7204.7204 0 0 0-.3698.0996.7487.7487 0 0 0-.2713.2702.7181.7181 0 0 0-.0996.3709c0 .132.0332.2557.0996.371a.7355.7355 0 0 0 .2713.2713.7354.7354 0 0 0 .3698.0985.7205.7205 0 0 0 .3698-.0996.7423.7423 0 0 0 .2702-.2691.7186.7186 0 0 0 .1008-.3721zm-.577.0584.2724.4522h-.1922l-.237-.4052h-.1546v.4052h-.1695v-1.02h.2988c.1268 0 .2195.0247.2783.0744.0595.0496.0892.1252.0892.2267a.2785.2785 0 0 1-.0492.1625c-.032.0466-.0775.0813-.1362.1042zm-.0412-.1408a.1532.1532 0 0 0 .056-.1214c0-.0573-.0164-.0981-.0491-.1225-.0329-.0251-.0847-.0377-.1557-.0377h-.1214v.3285h.1237c.061 0 .1098-.0157.1465-.047z"/></symbol><symbol id="ic-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol><symbol id="ic-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol><symbol id="ic-nextdoor" viewBox="0 0 32 32"><path fill="currentColor" d="M31.99 13.089l-15.99-9.792-5.495 3.365v-3.365h-5.005v6.427l-5.495 3.365 2.615 4.271 2.88-1.755v13.099h21v-13.099l2.875 1.755 2.615-4.271z"/></symbol></svg>
 
 <!-- ═══ Topbar ═══ -->
 <div style="background:var(--navy-dark);border-bottom:2px solid var(--gold)">
@@ -377,21 +432,11 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
   <div class="wrap">
     <div class="social-bar-inner">
       <div class="social-links">
-        <a href="https://www.google.com/maps/place/EDH+Hauling+and+Junk+Removal,+LLC/@38.8772739,-121.0485708,185331m/data=!3m2!1e3!4b1!4m6!3m5!1s0x668310787c111529:0xe4fbb73803552aee!8m2!3d38.8772026!4d-120.718952!16s%2Fg%2F11k4bbqjw1" target="_blank" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 11v2.4h5.6c-.24 1.4-1.7 4.1-5.6 4.1-3.37 0-6.13-2.8-6.13-6.25S8.63 4.75 12 4.75c1.92 0 3.2.82 3.94 1.52l2.68-2.58C16.92 2.1 14.66 1 12 1 6.48 1 2 5.48 2 11s4.48 10 10 10c5.78 0 9.6-4.06 9.6-9.78 0-.66-.07-1.16-.16-1.66H12z"/></svg>Google
-        </a>
-        <a href="https://www.yelp.com/biz/edh-hauling-and-junk-removal-el-dorado-hills-2" target="_blank" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 13.9l-1.9 3.3c-.3.5-.9.6-1.4.4l-1.5-.9c-.5-.3-.6-.9-.3-1.4l2-3.4 3.1 2zm1.1-1.4l3.8.4c.6.1 1 .6.9 1.2l-.3 1.7c-.1.6-.6 1-1.2.9l-3.9-.5.7-3.7zm-1.8-.6l-3.6-1.5c-.6-.2-.8-.9-.5-1.4l.8-1.5c.3-.5.9-.7 1.4-.5l3.6 1.6-1.7 3.3zm1.8-3.6l-.5-3.8c-.1-.6.3-1.1.9-1.2l1.7-.2c.6-.1 1.1.3 1.2.9l.5 3.9-3.8.4zm-2.1.4L7 6.9c-.4-.4-.4-1.1 0-1.5l1.2-1.2c.4-.4 1.1-.4 1.5 0l3.5 3.5-2.6 1.6z"/></svg>Yelp
-        </a>
-        <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook
-        </a>
-        <a href="https://www.instagram.com/edhhaul_" target="_blank" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Instagram
-        </a>
-        <a href="https://nextdoor.com/pages/edh-hauling-and-junk-removal-llc-el-dorado-hills-ca" target="_blank" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Nextdoor
-        </a>
+        <a href="https://www.google.com/maps/place/EDH+Hauling+and+Junk+Removal,+LLC/@38.8772739,-121.0485708,185331m/data=!3m2!1e3!4b1!4m6!3m5!1s0x668310787c111529:0xe4fbb73803552aee!8m2!3d38.8772026!4d-120.718952!16s%2Fg%2F11k4bbqjw1" target="_blank" class="social-btn" title="Google" aria-label="Google"><svg><use href="#ic-google"></use></svg><span class="lbl">Google</span></a>
+        <a href="https://www.yelp.com/biz/edh-hauling-and-junk-removal-el-dorado-hills-2" target="_blank" class="social-btn" title="Yelp" aria-label="Yelp"><svg><use href="#ic-yelp"></use></svg><span class="lbl">Yelp</span></a>
+        <a href="https://nextdoor.com/pages/edh-hauling-and-junk-removal-llc-el-dorado-hills-ca" target="_blank" class="social-btn" title="Nextdoor" aria-label="Nextdoor"><svg><use href="#ic-nextdoor"></use></svg><span class="lbl">Nextdoor</span></a>
+        <a href="https://www.instagram.com/edhhaul_" target="_blank" class="social-btn" title="Instagram" aria-label="Instagram"><svg><use href="#ic-instagram"></use></svg><span class="lbl">Instagram</span></a>
+        <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="social-btn" title="Facebook" aria-label="Facebook"><svg><use href="#ic-facebook"></use></svg><span class="lbl">Facebook</span></a>
       </div>
       <a href="https://www.stylemg.com/2023/10/03/467973/q-a-with-local-companies-blake-braboy-at-edh-hauling-junk-removal" target="_blank" class="press-badge">
         ★ As featured in <strong>Style Magazine</strong>
@@ -410,6 +455,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
         <a href="#about">About Blake</a>
         <a href="#areas">Service Areas</a>
         <a href="#reviews">Reviews</a>
+        <a href="#quote" class="nav-cta-desktop" id="navQuoteDesktop"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Request a Fast Quote</a>
       </div>
       <a href="#quote" class="nav-quote-btn" id="navQuote"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Free Quote</a>
       <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -445,7 +491,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
     <div class="hero-stats-group">
       <div class="stat-box"><div class="stat-n">5<span>★</span></div><div class="stat-l">Google · Yelp</div></div>
       <div class="stat-box"><div class="stat-n">$<span>99</span></div><div class="stat-l">Starting price</div></div>
-      <div class="stat-box"><div class="stat-n"><span>Same</span>-day</div><div class="stat-l">Slots available</div></div>
+      <div class="stat-box"><div class="stat-n"><span>Free</span></div><div class="stat-l">Estimates</div></div>
     </div>
   </div>
 </div>
@@ -699,11 +745,17 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
         <a href="#" class="chip"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Anatolia</a>
         <a href="#" class="chip"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Surrounding areas</a>
       </div>
-      <!-- Google Map embed centered on EDH Hauling service area -->
+      <!-- Google Map embed. NOTE: a basic place/search embed shows only a pin, not the service-area boundary.
+           To show the actual coverage polygon: build a free Google "My Maps", draw the service area, then paste
+           its share->embed <iframe> URL into the src below (it will render the drawn boundary). -->
       <div class="map-frame">
         <iframe
           src="https://www.google.com/maps?q=EDH+Hauling+and+Junk+Removal,+El+Dorado+Hills,+CA&output=embed"
           loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="EDH Hauling service area map"></iframe>
+      </div>
+      <div class="widget-note" style="margin-top:16px;margin-bottom:0">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <p><strong>Developer note (remove before launch):</strong> this embed shows a location pin only. To draw the real service-area outline (like Google/Yelp show), create a free <strong>Google My Maps</strong>, outline the coverage area, and paste its embed URL into the iframe above.</p>
       </div>
     </div>
   </div>
@@ -714,10 +766,29 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
   <div class="wrap">
     <div class="social-follow-inner">
       <span>Follow us</span>
-      <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="sfbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook</a>
-      <a href="https://www.instagram.com/edhhaul_" target="_blank" class="sfbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Instagram</a>
-      <a href="https://www.yelp.com/biz/edh-hauling-and-junk-removal-el-dorado-hills-2" target="_blank" class="sfbtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>Yelp</a>
-      <a href="https://nextdoor.com/pages/edh-hauling-and-junk-removal-llc-el-dorado-hills-ca" target="_blank" class="sfbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Nextdoor</a>
+      <a href="https://www.google.com/maps/place/EDH+Hauling+and+Junk+Removal,+LLC/@38.8772739,-121.0485708,185331m/data=!3m2!1e3!4b1!4m6!3m5!1s0x668310787c111529:0xe4fbb73803552aee!8m2!3d38.8772026!4d-120.718952!16s%2Fg%2F11k4bbqjw1" target="_blank" class="sfbtn" title="Google" aria-label="Google"><svg><use href="#ic-google"></use></svg><span class="lbl">Google</span></a>
+      <a href="https://www.yelp.com/biz/edh-hauling-and-junk-removal-el-dorado-hills-2" target="_blank" class="sfbtn" title="Yelp" aria-label="Yelp"><svg><use href="#ic-yelp"></use></svg><span class="lbl">Yelp</span></a>
+      <a href="https://nextdoor.com/pages/edh-hauling-and-junk-removal-llc-el-dorado-hills-ca" target="_blank" class="sfbtn" title="Nextdoor" aria-label="Nextdoor"><svg><use href="#ic-nextdoor"></use></svg><span class="lbl">Nextdoor</span></a>
+      <a href="https://www.instagram.com/edhhaul_" target="_blank" class="sfbtn" title="Instagram" aria-label="Instagram"><svg><use href="#ic-instagram"></use></svg><span class="lbl">Instagram</span></a>
+      <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="sfbtn" title="Facebook" aria-label="Facebook"><svg><use href="#ic-facebook"></use></svg><span class="lbl">Facebook</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Payment methods ═══ -->
+<div style="background:#fff;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="pay-inner">
+      <div class="eyebrow">Easy checkout</div>
+      <div class="pay-title">Pay however works for you</div>
+      <p class="pay-sub">Settle up on the spot, your way — no cash-only surprises.</p>
+      <div class="pay-chips">
+        <span class="pay-chip"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Cash</span>
+        <span class="pay-chip"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Credit &amp; debit</span>
+        <span class="pay-chip"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Venmo</span>
+        <span class="pay-chip"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Zelle</span>
+        <span class="pay-chip"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>PayPal</span>
+      </div>
     </div>
   </div>
 </div>
@@ -733,10 +804,11 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
           <a href="tel:+19164122891" class="foot-phone">(916) 412-2891</a>
           <a href="mailto:edhhaul@gmail.com" class="foot-email">info@edhhaul.com</a>
           <div class="foot-social">
-            <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="foot-soc-btn" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="rgba(255,255,255,.6)"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-            <a href="https://www.instagram.com/edhhaul_" target="_blank" class="foot-soc-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,.6)"/></svg></a>
-            <a href="https://www.yelp.com/biz/edh-hauling-and-junk-removal-el-dorado-hills-2" target="_blank" class="foot-soc-btn" aria-label="Yelp"><svg viewBox="0 0 24 24" fill="rgba(255,255,255,.6)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></a>
-            <a href="https://nextdoor.com/pages/edh-hauling-and-junk-removal-llc-el-dorado-hills-ca" target="_blank" class="foot-soc-btn" aria-label="Nextdoor"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a>
+            <a href="https://www.google.com/maps/place/EDH+Hauling+and+Junk+Removal,+LLC/@38.8772739,-121.0485708,185331m/data=!3m2!1e3!4b1!4m6!3m5!1s0x668310787c111529:0xe4fbb73803552aee!8m2!3d38.8772026!4d-120.718952!16s%2Fg%2F11k4bbqjw1" target="_blank" class="foot-soc-btn" title="Google" aria-label="Google"><svg><use href="#ic-google"></use></svg></a>
+            <a href="https://www.yelp.com/biz/edh-hauling-and-junk-removal-el-dorado-hills-2" target="_blank" class="foot-soc-btn" title="Yelp" aria-label="Yelp"><svg><use href="#ic-yelp"></use></svg></a>
+            <a href="https://nextdoor.com/pages/edh-hauling-and-junk-removal-llc-el-dorado-hills-ca" target="_blank" class="foot-soc-btn" title="Nextdoor" aria-label="Nextdoor"><svg><use href="#ic-nextdoor"></use></svg></a>
+            <a href="https://www.instagram.com/edhhaul_" target="_blank" class="foot-soc-btn" title="Instagram" aria-label="Instagram"><svg><use href="#ic-instagram"></use></svg></a>
+            <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="foot-soc-btn" title="Facebook" aria-label="Facebook"><svg><use href="#ic-facebook"></use></svg></a>
           </div>
         </div>
         <div class="foot-col">
@@ -757,14 +829,48 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
         </div>
       </div>
       <div class="foot-legal">
-        <p>© 2026 EDH Hauling and Junk Removal, LLC · El Dorado Hills, CA · Licensed &amp; Insured (edhhaul.com)</p>
+        <p>© 2026 EDH Hauling and Junk Removal, LLC (edhhaul.com)</p>
         <div style="display:flex;gap:14px">
           <a href="privacy-policy.html">Privacy policy</a>
           <a href="terms.html">Terms &amp; conditions</a>
           <a href="#">Sitemap</a>
         </div>
       </div>
+      <div class="foot-credit">
+        <a href="https://alquire.com" target="_blank" rel="noopener"><svg class="robot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2.4" x2="12" y2="5"/><circle cx="12" cy="2" r="1.1" fill="currentColor" stroke="none"/><rect x="5" y="5" width="14" height="11" rx="3.5"/><circle cx="9.5" cy="10.3" r="1.25" fill="currentColor" stroke="none"/><circle cx="14.5" cy="10.3" r="1.25" fill="currentColor" stroke="none"/><line x1="10" y1="13.4" x2="14" y2="13.4"/><line x1="3" y1="9" x2="3" y2="12"/><line x1="21" y1="9" x2="21" y2="12"/></svg><span>Designed by humans &amp; robots at <strong>Alquire, Inc.</strong></span></a>
+      </div>
     </footer>
+  </div>
+</div>
+
+<!-- ═══ Bottom-of-page promo modal ═══ -->
+<div class="promo-overlay" id="promoOverlay">
+  <div class="promo-modal" role="dialog" aria-modal="true" aria-label="Special offer">
+    <button class="promo-close" onclick="closePromo()" aria-label="Close">&times;</button>
+    <div id="promoMain">
+      <span class="promo-badge">$10 Off</span>
+      <h3>Not ready to book? <em>That's okay.</em></h3>
+      <p>Leave your info and we'll send <strong>$10 off your first job</strong>, plus the occasional seasonal offer. No spam — just a good deal when you're ready.</p>
+      <div class="promo-form">
+        <div class="promo-row">
+          <input type="text" placeholder="First name" aria-label="First name"/>
+          <input type="text" placeholder="Last name" aria-label="Last name"/>
+        </div>
+        <input type="tel" placeholder="Phone number" aria-label="Phone number"/>
+        <input type="email" placeholder="Email (optional)" aria-label="Email"/>
+        <textarea placeholder="What do you need removed? (optional)" aria-label="Description"></textarea>
+        <label class="promo-consent"><input type="checkbox"/><span>Text me about my request (reminders, "on my way," scheduling). Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
+        <label class="promo-consent"><input type="checkbox"/><span>Send me promotions and special offers from EDH Hauling. I can unsubscribe anytime.</span></label>
+        <button class="promo-submit" onclick="promoSubmit()">Send me my $10 off &rarr;</button>
+        <button class="promo-skip" onclick="closePromo()">No thanks, maybe later</button>
+        <p class="promo-fine">By submitting you agree to our <a href="privacy-policy.html">Privacy Policy</a> &amp; <a href="terms.html">Terms</a>.</p>
+      </div>
+    </div>
+    <div id="promoThanks" style="display:none;text-align:center;padding:18px 4px">
+      <div style="font-size:42px;margin-bottom:10px">&#127881;</div>
+      <h3 style="margin-bottom:8px">You're in!</h3>
+      <p style="color:var(--muted);font-size:14px;line-height:1.5">Your $10-off code is on its way. Blake will follow up shortly.</p>
+    </div>
   </div>
 </div>
 
@@ -788,11 +894,11 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
       <div class="chat-header-text"><b>EDH Hauling</b><small>Typically replies in minutes</small></div>
     </div>
     <div class="chat-body">
-      <div class="chat-msg">👋 Hi! Need junk hauled? Pick an option below and we'll get you a fast quote.</div>
+      <div class="chat-msg">👋 Need junk hauled? Send the details and photos in one quick form so Blake can review your request faster.</div>
       <div class="chat-quick">
-        <a href="sms:+19164122891?body=Hi!%20I%27d%20like%20a%20fast%20estimate.%20Here%20are%20my%20photos%3A">📷 Text a photo for a quote</a>
-        <a href="tel:+19164122891">📞 Call (916) 412-2891</a>
         <a href="#quote" onclick="toggleChat()">📝 Fill out the quote form</a>
+        <a href="tel:+19164122891">📞 Call Blake</a>
+        <a href="sms:+19164122891?body=Hi!%20I%27d%20like%20a%20junk%20removal%20quote.">💬 Text if you need help</a>
       </div>
     </div>
   </div>
@@ -809,10 +915,13 @@ document.addEventListener('click',function(e){var menu=document.getElementById('
 /* Reveal the compact "Free Quote" nav pill once the hero scrolls out of view */
 (function(){
   var hero=document.querySelector('.hero');
-  var btn=document.getElementById('navQuote');
-  if(hero&&btn&&'IntersectionObserver' in window){
+  var pill=document.getElementById('navQuote');
+  var deskBtn=document.getElementById('navQuoteDesktop');
+  if(hero&&'IntersectionObserver' in window){
     var io=new IntersectionObserver(function(entries){
-      btn.classList.toggle('is-visible',!entries[0].isIntersecting);
+      var pastHero=!entries[0].isIntersecting;
+      if(pill)pill.classList.toggle('is-visible',pastHero);
+      if(deskBtn)deskBtn.classList.toggle('is-visible',pastHero);
     },{rootMargin:'-70px 0px 0px 0px',threshold:0});
     io.observe(hero);
   }
@@ -835,9 +944,20 @@ function moveCarousel(dir){
 setInterval(function(){moveCarousel(1);},5000);
 window.addEventListener('resize',function(){revIndex=0;document.getElementById('revTrack').style.transform='translateX(0)';});
 
-/* Cookie banner */
-function acceptCookies(){document.getElementById('cookieBanner').classList.add('hidden');}
-function declineCookies(){document.getElementById('cookieBanner').classList.add('hidden');}
+/* Cookie banner — accept/decline hide it, and it auto-dismisses after 4s */
+function hideCookie(){var b=document.getElementById('cookieBanner');if(b)b.classList.add('hidden');}
+function acceptCookies(){hideCookie();}
+function declineCookies(){hideCookie();}
+setTimeout(hideCookie,4000);
+
+/* Bottom-of-page promo modal (shows once per visit) */
+var promoShown=false;
+function openPromo(){if(promoShown)return;promoShown=true;var o=document.getElementById('promoOverlay');if(o)o.classList.add('open');}
+function closePromo(){var o=document.getElementById('promoOverlay');if(o)o.classList.remove('open');}
+function promoSubmit(){var m=document.getElementById('promoMain'),t=document.getElementById('promoThanks');if(m&&t){m.style.display='none';t.style.display='block';}setTimeout(closePromo,2400);}
+window.addEventListener('scroll',function(){if(promoShown)return;if(window.innerHeight+window.scrollY>=document.body.offsetHeight-170){openPromo();}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePromo();});
+(function(){var o=document.getElementById('promoOverlay');if(o)o.addEventListener('click',function(e){if(e.target===o)closePromo();});})();
 
 /* Chat */
 function toggleChat(){
