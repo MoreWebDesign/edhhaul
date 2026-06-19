@@ -63,6 +63,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(
 .mobile-menu a{display:block;padding:13px 28px;color:rgba(255,255,255,.8);text-decoration:none;font-size:14px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.06);transition:color .15s}
 .mobile-menu a:hover{color:#fff;background:rgba(255,255,255,.05)}
 .mob-cta{color:var(--gold)!important;font-weight:700!important}
+/* Persistent quote pill in nav — desktop hidden (client removed desktop CTA); mobile reveals on scroll past hero */
+.nav-quote-btn{display:none;background:var(--cta-green);color:#fff;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;padding:9px 15px;border-radius:var(--r);text-decoration:none;align-items:center;gap:6px;white-space:nowrap;line-height:1}
+.nav-quote-btn:hover{background:var(--cta-green-dark)}
 
 /* ── Hero ── */
 .hero{position:relative;min-height:540px;display:flex;align-items:flex-end;overflow:hidden}
@@ -317,9 +320,11 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
   .hero{min-height:420px}
   .hero h1{font-size:34px}
   .hero-content{padding:34px 16px 38px}
-  .hero-actions{flex-direction:column;align-items:stretch}
-  .btn-gold,.btn-outline,.btn-sms{justify-content:center}
+  .hero-actions{flex-direction:column;align-items:stretch} .btn-gold,.btn-green,.btn-outline,.btn-sms{justify-content:center;text-align:center}
+  /* .btn-green svg{flex-shrink:0}  <- only add if iPhone needs it */
   .nav-links{display:none}
+  .nav-quote-btn{display:inline-flex;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-4px);transition:opacity .22s ease,transform .22s ease}
+  .nav-quote-btn.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:none}
   .hamburger{display:flex}
   .logo-img{height:48px}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
@@ -376,7 +381,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 11v2.4h5.6c-.24 1.4-1.7 4.1-5.6 4.1-3.37 0-6.13-2.8-6.13-6.25S8.63 4.75 12 4.75c1.92 0 3.2.82 3.94 1.52l2.68-2.58C16.92 2.1 14.66 1 12 1 6.48 1 2 5.48 2 11s4.48 10 10 10c5.78 0 9.6-4.06 9.6-9.78 0-.66-.07-1.16-.16-1.66H12z"/></svg>Google
         </a>
         <a href="https://www.yelp.com/biz/edh-hauling-and-junk-removal-el-dorado-hills-2" target="_blank" class="social-btn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>Yelp
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 13.9l-1.9 3.3c-.3.5-.9.6-1.4.4l-1.5-.9c-.5-.3-.6-.9-.3-1.4l2-3.4 3.1 2zm1.1-1.4l3.8.4c.6.1 1 .6.9 1.2l-.3 1.7c-.1.6-.6 1-1.2.9l-3.9-.5.7-3.7zm-1.8-.6l-3.6-1.5c-.6-.2-.8-.9-.5-1.4l.8-1.5c.3-.5.9-.7 1.4-.5l3.6 1.6-1.7 3.3zm1.8-3.6l-.5-3.8c-.1-.6.3-1.1.9-1.2l1.7-.2c.6-.1 1.1.3 1.2.9l.5 3.9-3.8.4zm-2.1.4L7 6.9c-.4-.4-.4-1.1 0-1.5l1.2-1.2c.4-.4 1.1-.4 1.5 0l3.5 3.5-2.6 1.6z"/></svg>Yelp
         </a>
         <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="social-btn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook
@@ -406,6 +411,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
         <a href="#areas">Service Areas</a>
         <a href="#reviews">Reviews</a>
       </div>
+      <a href="#quote" class="nav-quote-btn" id="navQuote"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Free Quote</a>
       <button class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -428,7 +434,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
       <div class="hero-tagline">We fill. We dump.</div>
       <p class="hero-sub">EDH Hauling &amp; Junk Removal is your local, family-run crew in El Dorado Hills. Blake and the team handle everything — loading, hauling, responsible disposal. You don't lift a finger.</p>
       <div class="hero-actions">
-        <a href="#quote" class="btn-green"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.29-1.29a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Get a free quote</a>
+        <a href="#quote" class="btn-green"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Request a Fast Quote</a>
         <a href="sms:+19164122891?body=Hi!%20I%27d%20like%20a%20fast%20estimate.%20Here%20are%20my%20photos%3A" class="btn-sms"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Text us a photo</a>
         <a href="#services" class="btn-outline">See all services →</a>
       </div>
@@ -467,7 +473,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
       <p class="sec-sub">Residential, commercial, or estate — if it's taking up space, EDH Hauling &amp; Junk Removal handles it across El Dorado Hills and the surrounding foothills.</p>
       <div class="svc-grid">
         <div class="svc-card"><img class="svc-thumb" src="images/furniture-removal.jpeg" alt="Furniture removal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="svc-thumb-ph" style="display:none;background:linear-gradient(135deg,#1B3A6B,#4A90C4)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="svc-body"><h3>Furniture removal</h3><p>Sofas, mattresses, desks, dressers — we carry everything out.</p><span class="svc-link">Learn more →</span></div></div>
-        <div class="svc-card"><img class="svc-thumb" src="images/appliance-removal.jpeg" alt="Appliance removal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="svc-thumb-ph" style="display:none;background:linear-gradient(135deg,#1B3A6B,#2C5F8A)"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="svc-body"><h3>Appliance removal</h3><p>Fridges, washers, dryers, ovens — safe Freon disposal included.</p><span class="svc-link">Learn more →</span></div></div>
+        <div class="svc-card"><img class="svc-thumb" src="images/appliance-removal.jpeg" alt="Appliance removal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="svc-thumb-ph" style="display:none;background:linear-gradient(135deg,#1B3A6B,#2C5F8A)"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="svc-body"><h3>Appliance removal</h3><p>Fridges, washers, dryers, ovens — hauled away safely and responsibly.</p><span class="svc-link">Learn more →</span></div></div>
         <div class="svc-card"><img class="svc-thumb" src="images/garage-cleanout.jpeg" alt="Garage cleanout" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="svc-thumb-ph" style="display:none;background:linear-gradient(135deg,#122750,#1B3A6B)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="svc-body"><h3>Garage cleanout</h3><p>Full garage purge — we sort, load, and sweep the floor clean.</p><span class="svc-link">Learn more →</span></div></div>
         <div class="svc-card"><img class="svc-thumb" src="images/construction-debris-removal.jpeg" alt="Construction debris" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="svc-thumb-ph" style="display:none;background:linear-gradient(135deg,#2C5F8A,#4A90C4)"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="svc-body"><h3>Construction debris</h3><p>Drywall, concrete, lumber, tiles — post-reno cleanups handled fast.</p><span class="svc-link">Learn more →</span></div></div>
         <div class="svc-card"><img class="svc-thumb" src="images/storage-unit-cleanouts.jpeg" alt="Storage unit cleanout" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="svc-thumb-ph" style="display:none;background:linear-gradient(135deg,#1B3A6B,#4A90C4)"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div><div class="svc-body"><h3>Storage unit cleanout</h3><p>We clear it out so you stop paying monthly. Fast and thorough.</p><span class="svc-link">Learn more →</span></div></div>
@@ -609,26 +615,56 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
 <div style="background:var(--navy-dark);border-top:4px solid var(--gold)" id="quote">
   <div class="quote-inner">
     <div class="eyebrow">Free estimate</div>
-    <div class="sec-title">Tell us what needs to go</div>
-    <p class="sec-sub">Blake typically responds within a few hours. A photo means a faster quote.</p>
-    <div class="qform">
+    <div class="sec-title">Request a fast quote</div>
+    <p class="sec-sub">Send Blake the details, address, and photos upfront so he can review the job and follow up faster.</p>
+
+ <div class="qform">
       <div class="frow">
         <div class="fgrp"><label>Your name</label><input type="text" placeholder="Jane Smith"/></div>
         <div class="fgrp"><label>Phone number</label><input type="tel" placeholder="(916) 555-0100"/></div>
       </div>
       <div class="frow">
+        <div class="fgrp"><label>Email optional</label><input type="email" placeholder="jane@example.com"/></div>
+        <div class="fgrp"><label>Preferred timing</label><input type="text" placeholder="Today, tomorrow, this weekend…"/></div>
+      </div>
+      <div class="frow">
+        <div class="fgrp"><label>Street address</label><input type="text" placeholder="1234 Example Drive"/></div>
+        <div class="fgrp"><label>City / ZIP</label><input type="text" placeholder="El Dorado Hills, 95762"/></div>
+      </div>
+      <div class="frow">
         <div class="fgrp"><label>Service needed</label><select><option value="">Select a service…</option><option>Furniture removal</option><option>Appliance removal</option><option>Garage cleanout</option><option>Construction debris</option><option>Estate / foreclosure cleanout</option><option>Storage unit cleanout</option><option>Yard &amp; wood debris</option><option>E-waste / cardboard</option><option>Mattress removal</option><option>Delivery services</option><option>Not sure — just describe it</option></select></div>
-        <div class="fgrp"><label>ZIP code</label><input type="text" placeholder="95762"/></div>
+        <div class="fgrp"><label>Approximate amount</label><select><option value="">Select an amount…</option><option>Single item</option><option>Small load</option><option>Half trailer</option><option>Full trailer</option><option>Multiple loads</option><option>Not sure</option></select></div>
       </div>
-      <div class="fgrp" style="margin-bottom:12px"><label>Brief description</label><textarea placeholder="What needs to go? Approximate size or quantity helps Blake price faster."></textarea></div>
-      <div class="fgrp"><label>Photos (optional — speeds up your quote)</label><div class="upload-zone"><p>📎 <strong>Click to attach photos</strong> or drag and drop here<br>JPG · PNG · HEIC · up to 10MB each</p></div></div>
-      <button class="fsub"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send my quote request</button>
+      <div class="fgrp" style="margin-bottom:12px"><label>What needs to be removed?</label><textarea placeholder="Describe the items, quantity, size, and anything that may affect access or pricing."></textarea></div>
+      <div class="fgrp" style="margin-bottom:12px"><label>Access notes</label><textarea placeholder="Gate code, stairs, apartment number, parking, heavy items, narrow driveway, etc."></textarea></div>
+
+      <div class="fgrp">
+        <label>Photos optional — speeds up your quote</label>
+        <div class="upload-zone">
+          <p>📎 <strong>Click to attach photos</strong> or drag and drop here<br>JPG · PNG · HEIC · up to 10MB each</p>
+        </div>
+      </div>
+
+      <button class="fsub">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send my quote request
+      </button>
+
       <div class="sms-alt">
-        <a href="sms:+19164122891?body=Hi!%20I%27d%20like%20a%20fast%20estimate.%20Here%20are%20my%20photos%3A"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Or text us photos directly</a>
+        <a href="tel:+19164122891">Call Blake at (916) 412-2891</a>
         <span>|</span>
-        <a href="tel:+19164122891">Call (916) 412-2891</a>
+        <a href="sms:+19164122891?body=Hi!%20I%27d%20like%20a%20fast%20estimate.%20Here%20are%20my%20photos%3A">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Text if you need help
+        </a>
       </div>
-      <p class="fnote">You'll get a confirmation text within minutes. No spam, ever.</p>
+<br>
+      <!-- Note for Blake/dev: this is where the live integration with Workiz will be embedded -->
+      <div class="widget-note">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <p><strong>Prototype note (remove before launch):</strong> connect this form to <strong>Workiz</strong>, Jotform, or another intake workflow before launch. </p>
+      </div>
+
     </div>
   </div>
 </div>
@@ -695,7 +731,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
           <img class="foot-logo" src="images/logo.png" alt="EDH Hauling and Junk Removal" style="height:85px;width:auto;margin-bottom:11px;display:block"/>
           <p class="foot-brand-text">El Dorado Hills, CA 95762<br>Mon–Sun · 6:00am–8:00pm</p>
           <a href="tel:+19164122891" class="foot-phone">(916) 412-2891</a>
-          <a href="mailto:info@edhhaul.com" class="foot-email">info@edhhaul.com</a>
+          <a href="mailto:edhhaul@gmail.com" class="foot-email">info@edhhaul.com</a>
           <div class="foot-social">
             <a href="https://www.facebook.com/people/EDH-Hauling-and-Junk-Removal/61573696422713/" target="_blank" class="foot-soc-btn" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="rgba(255,255,255,.6)"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
             <a href="https://www.instagram.com/edhhaul_" target="_blank" class="foot-soc-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,.6)"/></svg></a>
@@ -721,7 +757,7 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
         </div>
       </div>
       <div class="foot-legal">
-        <p>© 2026 EDH Hauling and Junk Removal, LLC · El Dorado Hills, CA · Licensed &amp; Insured</p>
+        <p>© 2026 EDH Hauling and Junk Removal, LLC · El Dorado Hills, CA · Licensed &amp; Insured (edhhaul.com)</p>
         <div style="display:flex;gap:14px">
           <a href="privacy-policy.html">Privacy policy</a>
           <a href="terms.html">Terms &amp; conditions</a>
@@ -769,6 +805,18 @@ footer{padding:44px 0 0;border-top:3px solid var(--gold)}
 function toggleMenu(){var m=document.getElementById('mobileMenu');m.style.display=m.style.display==='flex'?'none':'flex';}
 function closeMenu(){document.getElementById('mobileMenu').style.display='none';}
 document.addEventListener('click',function(e){var menu=document.getElementById('mobileMenu');if(menu&&menu.style.display==='flex'&&!e.target.closest('[onclick]')&&!e.target.closest('#mobileMenu')){menu.style.display='none';}});
+
+/* Reveal the compact "Free Quote" nav pill once the hero scrolls out of view */
+(function(){
+  var hero=document.querySelector('.hero');
+  var btn=document.getElementById('navQuote');
+  if(hero&&btn&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      btn.classList.toggle('is-visible',!entries[0].isIntersecting);
+    },{rootMargin:'-70px 0px 0px 0px',threshold:0});
+    io.observe(hero);
+  }
+})();
 
 /* Reviews carousel */
 var revIndex=0;
