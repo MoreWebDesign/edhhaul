@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#1e1e2e" />
+<meta name="description" content="Lunarythm is a fictional Roseville, CA service that helps night-shift healthcare teams recover, coordinate, and live better between shifts." />
+<title>Lunarythm — Night-shift life, synced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/*
+  Lunarythm fictional website
+  Inspired by the uploaded Catppuccin-style board: Mocha dark, Latte light, DM Sans + DM Mono,
+  rounded geometry, pastel semantic accents, icon cards, status chips, and soft technical UI.
+*/
+:root {
+  --base:    #1e1e2e;
+  --mantle:  #181825;
+  --crust:   #11111b;
+  --surface0:#313244;
+  --surface1:#45475a;
+  --surface2:#585b70;
+  --overlay0:#6c7086;
+  --overlay1:#7f849c;
+  --overlay2:#9399b2;
+  --subtext0:#a6adc8;
+  --subtext1:#bac2de;
+  --text:    #cdd6f4;
+  --lavender:#b4befe;
+  --blue:    #89b4fa;
+  --sapphire:#74c7ec;
+  --sky:     #89dceb;
+  --teal:    #94e2d5;
+  --green:   #a6e3a1;
+  --yellow:  #f9e2af;
+  --peach:   #fab387;
+  --maroon:  #eba0ac;
+  --red:     #f38ba8;
+  --mauve:   #cba6f7;
+  --pink:    #f5c2e7;
+  --flamingo:#f2cdcd;
+  --rosewater:#f5e0dc;
+  --latte-base:#eff1f5;
+  --latte-surface0:#ccd0da;
+  --latte-surface1:#bcc0cc;
+  --latte-surface2:#acb0be;
+  --latte-text:#4c4f69;
+  --latte-subtext:#6c6f85;
+  --latte-blue:#1e66f5;
+  --latte-mauve:#8839ef;
+  --latte-teal:#179299;
+  --latte-green:#40a02b;
+  --latte-peach:#fe640b;
+  --latte-lavender:#7287fd;
+  --font-sans:'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --r: 16px;
+  --r-lg: 28px;
+  --shadow-soft: 0 22px 70px rgba(17,17,27,.36);
+  --max: 1160px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(203,166,247,.16), transparent 34rem),
+    radial-gradient(circle at 92% 14%, rgba(137,220,235,.13), transparent 28rem),
+    linear-gradient(180deg, var(--base) 0%, var(--mantle) 64%, var(--crust) 100%);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+body.menu-open, body.modal-open { overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+button { color: inherit; }
+img, svg { max-width: 100%; }
+::selection { background: rgba(203,166,247,.35); color: var(--rosewater); }
+.mono { font-family: var(--font-mono); }
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -80px;
+  z-index: 200;
+  background: var(--mauve);
+  color: var(--crust);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: top .2s ease;
+}
+.skip-link:focus { top: 16px; }
+.progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--mauve), var(--sapphire), var(--teal), var(--green));
+  z-index: 80;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  border-bottom: 1px solid rgba(88,91,112,.55);
+  background: rgba(30,30,46,.79);
+  backdrop-filter: blur(18px) saturate(160%);
+}
+.bar {
+  max-width: var(--max);
+  margin: 0 auto;
+  min-height: 74px;
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -.035em;
+  white-space: nowrap;
+}
+.brand small {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--overlay1);
+  letter-spacing: .1em;
+  margin-left: 4px;
+  text-transform: uppercase;
+}
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  filter: drop-shadow(0 0 16px rgba(180,190,254,.18));
+}
+.nav-wrap { display: flex; align-items: center; gap: 20px; }
+.nav-links { display: flex; align-items: center; gap: 22px; color: var(--subtext0); font-size: 14.5px; }
+.nav-links a { position: relative; transition: color .16s ease; }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .18s ease;
+}
+.nav-links a:hover, .nav-links a:focus { color: var(--lavender); }
+.nav-links a:hover::after, .nav-links a:focus::after { transform: scaleX(1); }
+.btn, .pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease, opacity .18s ease, box-shadow .18s ease;
+}
+.btn { padding: 12px 21px; font-size: 14.5px; }
+.pill { padding: 8px 17px; font-size: 13px; font-family: var(--font-mono); }
+.btn-primary, .pill-primary { background: var(--mauve); color: var(--crust); border-color: var(--mauve); box-shadow: 0 12px 32px -18px var(--mauve); }
+.btn-primary:hover, .pill-primary:hover { background: #b08de8; transform: translateY(-1px); }
+.btn-ghost { color: var(--teal); border-color: rgba(148,226,213,.55); background: rgba(148,226,213,.06); }
+.btn-ghost:hover { background: rgba(148,226,213,.13); transform: translateY(-1px); }
+.btn-outline { color: var(--subtext1); border-color: var(--surface1); background: transparent; }
+.btn-outline:hover { border-color: var(--lavender); color: var(--lavender); transform: translateY(-1px); }
+.nav-cta {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px) scale(.98);
+}
+.header.scrolled .nav-cta {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+.hamburger {
+  display: none;
+  width: 43px;
+  height: 43px;
+  border: 1px solid var(--surface1);
+  border-radius: 12px;
+  background: rgba(24,24,37,.8);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span { width: 18px; height: 2px; border-radius: 9px; background: var(--text); transition: transform .18s ease, opacity .18s ease; }
+.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 74px 14px auto 14px;
+  z-index: 69;
+  border: 1px solid var(--surface1);
+  border-radius: 22px;
+  background: rgba(24,24,37,.98);
+  box-shadow: var(--shadow-soft);
+  padding: 16px;
+}
+.mobile-menu a, .mobile-menu button {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  color: var(--subtext1);
+  background: transparent;
+  text-align: left;
+}
+.mobile-menu a:hover, .mobile-menu button:hover { background: rgba(49,50,68,.75); color: var(--lavender); }
+.mobile-menu .mobile-menu-cta { margin-top: 8px; justify-content: center; color: var(--crust); background: var(--mauve); }
+main { overflow: clip; }
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 78px 26px 72px;
+  min-height: calc(100vh - 74px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr);
+  align-items: center;
+  gap: 52px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--sapphire);
+  margin-bottom: 20px;
+}
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: var(--green); box-shadow: 0 0 0 6px rgba(166,227,161,.1); }
+h1 {
+  max-width: 11ch;
+  font-size: clamp(3.4rem, 8vw, 6.8rem);
+  line-height: .88;
+  letter-spacing: -.065em;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+h1 .lav { color: var(--lavender); }
+h1 .sap { color: var(--sapphire); }
+h1 .tea { color: var(--teal); }
+.hero-lede {
+  max-width: 57ch;
+  color: var(--subtext1);
+  font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+  line-height: 1.78;
+}
+.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.signal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 26px;
+  max-width: 620px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border: 1px solid transparent;
+}
+.badge::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
+.badge.teal { color: var(--teal); background: rgba(148,226,213,.11); border-color: rgba(148,226,213,.28); }
+.badge.green { color: var(--green); background: rgba(166,227,161,.11); border-color: rgba(166,227,161,.28); }
+.badge.peach { color: var(--peach); background: rgba(250,179,135,.12); border-color: rgba(250,179,135,.32); }
+.badge.mauve { color: var(--mauve); background: rgba(203,166,247,.12); border-color: rgba(203,166,247,.32); }
+.hero-card {
+  border: 1px solid rgba(88,91,112,.72);
+  border-radius: 32px;
+  background:
+    linear-gradient(135deg, rgba(69,71,90,.55), rgba(24,24,37,.78)),
+    radial-gradient(circle at 50% 0%, rgba(180,190,254,.16), transparent 18rem);
+  padding: 18px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  min-height: 598px;
+}
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  pointer-events: none;
+  border-radius: 24px;
+  border: 1px solid rgba(205,214,244,.07);
+}
+.app-frame {
+  min-height: 562px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--mantle);
+  border: 1px solid var(--surface0);
+  display: flex;
+  flex-direction: column;
+}
+.app-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--surface0);
+  background: rgba(17,17,27,.55);
+}
+.window-dots { display: flex; gap: 7px; }
+.window-dots i { width: 10px; height: 10px; border-radius: 999px; display: block; }
+.window-dots i:nth-child(1) { background: var(--red); }
+.window-dots i:nth-child(2) { background: var(--yellow); }
+.window-dots i:nth-child(3) { background: var(--green); }
+.app-title { font-family: var(--font-mono); color: var(--overlay2); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.app-body { padding: 16px; display: grid; gap: 14px; }
+.shift-panel {
+  border: 1px solid var(--surface0);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(49,50,68,.82), rgba(30,30,46,.88));
+  padding: 18px;
+}
+.shift-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 18px; }
+.shift-top h2 { font-size: 24px; line-height: 1.1; letter-spacing: -.02em; }
+.shift-top p { font-family: var(--font-mono); color: var(--overlay2); font-size: 12px; margin-top: 5px; }
+.ring-grid { display: grid; grid-template-columns: 130px 1fr; gap: 16px; align-items: center; }
+.recovery-ring {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, var(--mantle) 0 48%, transparent 49%),
+    conic-gradient(var(--teal) 0 72%, rgba(88,91,112,.55) 72% 100%);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.recovery-ring span { font-size: 30px; font-weight: 700; color: var(--teal); letter-spacing: -.04em; }
+.recovery-ring small { display: block; margin-top: -8px; font-family: var(--font-mono); font-size: 9px; color: var(--overlay2); text-align: center; text-transform: uppercase; }
+.check-list { display: grid; gap: 8px; }
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(17,17,27,.42);
+  border: 1px solid rgba(88,91,112,.52);
+}
+.check b { font-size: 13px; }
+.check span { font-family: var(--font-mono); font-size: 10px; color: var(--overlay2); }
+.icon-wall {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.ic-card {
+  border: 1px solid var(--surface0);
+  border-radius: 16px;
+  background: rgba(24,24,37,.78);
+  min-height: 92px;
+  padding: 14px 10px 10px;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.ic-card:hover { transform: translateY(-4px); }
+.ic-card svg { width: 30px; height: 30px; }
+.ic-card span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .06em; color: var(--subtext0); text-align: center; }
+.ic-card.lav:hover { border-color: var(--lavender); box-shadow: 0 0 0 1px var(--lavender), 0 12px 32px -16px var(--lavender); }
+.ic-card.sap:hover { border-color: var(--sapphire); box-shadow: 0 0 0 1px var(--sapphire), 0 12px 32px -16px var(--sapphire); }
+.ic-card.teal:hover { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal), 0 12px 32px -16px var(--teal); }
+.ic-card.green:hover { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), 0 12px 32px -16px var(--green); }
+.ic-card.peach:hover { border-color: var(--peach); box-shadow: 0 0 0 1px var(--peach), 0 12px 32px -16px var(--peach); }
+.ic-card.mauve:hover { border-color: var(--mauve); box-shadow: 0 0 0 1px var(--mauve), 0 12px 32px -16px var(--mauve); }
+.ic-card.pink:hover { border-color: var(--pink); box-shadow: 0 0 0 1px var(--pink), 0 12px 32px -16px var(--pink); }
+.ic-card.sky:hover { border-color: var(--sky); box-shadow: 0 0 0 1px var(--sky), 0 12px 32px -16px var(--sky); }
+.section { max-width: var(--max); margin: 0 auto; padding: 82px 26px; }
+.section-head { max-width: 720px; margin-bottom: 34px; }
+.section-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--overlay2);
+  margin-bottom: 8px;
+}
+.section h2 { font-size: clamp(2.1rem, 5vw, 4.35rem); line-height: .95; letter-spacing: -.055em; margin-bottom: 16px; }
+.section-head p { color: var(--subtext0); font-size: 17px; max-width: 65ch; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.feature {
+  border: 1px solid var(--surface0);
+  border-radius: var(--r-lg);
+  padding: 26px;
+  background: rgba(24,24,37,.72);
+  min-height: 252px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease;
+}
+.feature:hover { transform: translateY(-4px); border-color: var(--surface2); }
+.feature::after {
+  content: "";
+  position: absolute;
+  inset: auto -30% -70% -30%;
+  height: 190px;
+  background: radial-gradient(circle, rgba(203,166,247,.11), transparent 65%);
+  pointer-events: none;
+}
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  margin-bottom: 18px;
+  background: rgba(69,71,90,.55);
+}
+.feature h3 { font-size: 20px; letter-spacing: -.02em; margin-bottom: 8px; }
+.feature p { color: var(--subtext0); font-size: 15px; }
+.feature .mini { margin-top: 16px; font-family: var(--font-mono); font-size: 11px; color: var(--overlay2); }
+.latte-band { background: var(--latte-base); color: var(--latte-text); }
+.latte-band .section-kicker { color: var(--latte-subtext); }
+.latte-band .section h2 { color: var(--latte-text); }
+.latte-band .section-head p { color: var(--latte-subtext); }
+.product-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 18px; align-items: stretch; }
+.phone {
+  width: min(375px, 100%);
+  min-height: 684px;
+  margin: 0 auto;
+  border-radius: 46px;
+  padding: 14px;
+  background: #11111b;
+  box-shadow: 0 30px 90px rgba(76,79,105,.22);
+}
+.phone-screen {
+  height: 100%;
+  min-height: 656px;
+  background: #eff1f5;
+  border-radius: 34px;
+  overflow: hidden;
+  border: 1px solid #ccd0da;
+  display: flex;
+  flex-direction: column;
+}
+.phone-status { height: 32px; display: flex; align-items: center; justify-content: center; color: #6c6f85; font-family: var(--font-mono); font-size: 11px; }
+.phone-header { padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; }
+.phone-header h3 { font-size: 18px; letter-spacing: -.02em; }
+.moon-chip { background: rgba(114,135,253,.12); color: #7287fd; padding: 6px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 10px; }
+.sleep-card { margin: 0 18px; border-radius: 28px; padding: 22px; background: linear-gradient(135deg, #1e1e2e, #313244); color: #cdd6f4; position: relative; overflow: hidden; }
+.sleep-card::after { content:""; position:absolute; width:180px; height:180px; border-radius:50%; right:-70px; top:-70px; background:rgba(137,220,235,.18); }
+.sleep-card p { color: #bac2de; font-size: 13px; }
+.sleep-card strong { display:block; font-size: 42px; letter-spacing: -.06em; margin: 12px 0 2px; color: #94e2d5; }
+.phone-list { padding: 16px 18px 20px; display: grid; gap: 10px; }
+.phone-item { background: #fff; border: 1px solid #ccd0da; border-radius: 18px; padding: 13px; display: grid; grid-template-columns: 38px 1fr auto; align-items: center; gap: 12px; }
+.phone-icon { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; }
+.phone-item b { display:block; font-size: 13px; }
+.phone-item span { font-family: var(--font-mono); font-size: 10px; color: #6c6f85; }
+.product-copy { display: grid; gap: 14px; }
+.module-card {
+  background: #fff;
+  border: 1px solid var(--latte-surface0);
+  border-radius: 24px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 16px;
+  align-items: start;
+  transition: transform .18s ease, border-color .18s ease;
+}
+.module-card:hover { transform: translateY(-3px); border-color: var(--latte-lavender); }
+.module-card h3 { font-size: 19px; letter-spacing: -.025em; }
+.module-card p { color: var(--latte-subtext); font-size: 15px; margin-top: 4px; }
+.module-card .feature-icon { margin: 0; background: rgba(114,135,253,.1); }
+.stats-strip { display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 26px; }
+.stat { border: 1px solid var(--surface0); border-radius: 20px; background: rgba(24,24,37,.74); padding: 18px; }
+.stat strong { display:block; font-size: 34px; letter-spacing: -.06em; line-height: 1; color: var(--lavender); }
+.stat span { font-family: var(--font-mono); font-size: 10.5px; color: var(--overlay2); text-transform: uppercase; letter-spacing: .08em; }
+.process {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  counter-reset: steps;
+}
+.step {
+  counter-increment: steps;
+  position: relative;
+  min-height: 260px;
+  border: 1px solid var(--surface0);
+  border-radius: 24px;
+  background: rgba(24,24,37,.7);
+  padding: 24px;
+}
+.step::before {
+  content: "0" counter(steps);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(203,166,247,.12);
+  color: var(--mauve);
+  border: 1px solid rgba(203,166,247,.28);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin-bottom: 44px;
+}
+.step h3 { font-size: 19px; margin-bottom: 8px; letter-spacing: -.02em; }
+.step p { color: var(--subtext0); font-size: 14.5px; }
+.pricing-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+.price-card {
+  border: 1px solid var(--surface0);
+  border-radius: 28px;
+  background: rgba(24,24,37,.76);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.price-card.popular { border-color: var(--mauve); box-shadow: 0 22px 60px -34px var(--mauve); }
+.ribbon { position:absolute; right: 20px; top: 20px; color: var(--crust); background: var(--green); padding: 5px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 10px; }
+.price-card h3 { font-size: 22px; letter-spacing: -.03em; margin-bottom: 8px; }
+.price-card p { color: var(--subtext0); font-size: 14.5px; }
+.price { font-size: 44px; line-height: 1; letter-spacing: -.07em; margin: 24px 0 5px; color: var(--rosewater); }
+.price small { font-size: 14px; letter-spacing: normal; color: var(--overlay2); font-family: var(--font-mono); }
+.price-card ul { list-style:none; display:grid; gap: 10px; margin: 22px 0 24px; color: var(--subtext1); font-size: 14.5px; }
+.price-card li { display:flex; gap: 10px; }
+.price-card li::before { content:"✓"; color: var(--green); font-weight:700; }
+.price-card .btn { margin-top: auto; }
+.testimonials { display:grid; grid-template-columns: 1.1fr .9fr; gap: 16px; align-items: stretch; }
+.quote-card {
+  border: 1px solid var(--surface0);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top right, rgba(245,194,231,.14), transparent 20rem),
+    rgba(24,24,37,.75);
+  padding: 34px;
+}
+.quote-card blockquote { font-size: clamp(1.5rem, 3vw, 2.7rem); line-height: 1.08; letter-spacing: -.045em; }
+.quote-card cite { display:block; margin-top: 24px; color: var(--overlay2); font-style: normal; font-family: var(--font-mono); font-size: 12px; }
+.review-list { display:grid; gap: 14px; }
+.review { border: 1px solid var(--surface0); border-radius: 22px; background: rgba(24,24,37,.72); padding: 20px; }
+.review p { color: var(--subtext0); font-size: 14.5px; }
+.review b { display:block; margin-top: 12px; color: var(--lavender); }
+.location-grid { display:grid; grid-template-columns: .9fr 1.1fr; gap: 18px; }
+.location-card, .map-card, .contact-card {
+  border: 1px solid var(--surface0);
+  border-radius: 28px;
+  background: rgba(24,24,37,.76);
+  overflow: hidden;
+}
+.location-card { padding: 26px; display: grid; align-content: start; gap: 18px; }
+.address-line { display:flex; align-items:start; gap:12px; color: var(--subtext1); }
+.address-line svg { flex: 0 0 24px; margin-top: 2px; }
+.hours { display:grid; gap: 8px; margin-top: 4px; }
+.hours div { display:flex; justify-content:space-between; gap: 18px; border-bottom: 1px solid var(--surface0); padding-bottom: 8px; color: var(--subtext0); }
+.hours span { font-family: var(--font-mono); color: var(--overlay2); font-size: 11px; }
+.map-card iframe { width: 100%; height: 100%; min-height: 428px; border: 0; display: block; filter: saturate(.85) contrast(1.05); }
+.contact-card { margin-top: 18px; padding: 24px; }
+.form-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field { display:grid; gap: 6px; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-family: var(--font-mono); color: var(--overlay2); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  border: 1px solid var(--surface1);
+  border-radius: 13px;
+  background: var(--mantle);
+  color: var(--text);
+  padding: 12px 13px;
+  outline: none;
+}
+.field textarea { min-height: 110px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--lavender); box-shadow: 0 0 0 4px rgba(180,190,254,.12); }
+.faq-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+details {
+  border: 1px solid var(--surface0);
+  border-radius: 20px;
+  background: rgba(24,24,37,.76);
+  overflow: hidden;
+}
+summary { cursor:pointer; padding: 18px 20px; font-weight:700; list-style:none; display:flex; align-items:center; justify-content:space-between; gap: 18px; }
+summary::-webkit-details-marker { display:none; }
+summary::after { content:"+"; color: var(--teal); font-size: 24px; line-height: 1; }
+details[open] summary::after { content:"–"; }
+details p { padding: 0 20px 18px; color: var(--subtext0); font-size: 14.5px; }
+.footer {
+  border-top: 1px solid var(--surface0);
+  background: var(--crust);
+  padding: 48px 26px 36px;
+}
+.footer-inner { max-width: var(--max); margin: 0 auto; display:grid; grid-template-columns: 1.1fr .9fr; gap: 30px; align-items:start; }
+.footer p { color: var(--overlay2); max-width: 54ch; margin-top: 14px; }
+.footer-links { display:flex; flex-wrap: wrap; justify-content:flex-end; gap: 14px 20px; color: var(--subtext0); font-size: 14px; }
+.footer-links a, .footer-links button { background:none; border:0; cursor:pointer; color:inherit; padding:0; }
+.footer-links a:hover, .footer-links button:hover { color: var(--lavender); }
+.footer-bottom { max-width: var(--max); margin: 28px auto 0; display:flex; justify-content:space-between; gap: 14px; flex-wrap: wrap; color: var(--overlay0); font-family: var(--font-mono); font-size: 11px; }
+.cookie {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 96;
+  max-width: min(438px, calc(100vw - 36px));
+  border: 1px solid var(--surface1);
+  border-radius: 20px;
+  background: rgba(24,24,37,.96);
+  box-shadow: var(--shadow-soft);
+  padding: 16px;
+  display: none;
+}
+.cookie.show { display:block; animation: rise .22s ease both; }
+.cookie p { color: var(--subtext0); font-size: 13.5px; margin: 4px 0 12px; }
+.cookie-actions { display:flex; gap: 9px; flex-wrap: wrap; }
+.chat-launcher {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 95;
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgba(203,166,247,.55);
+  border-radius: 22px;
+  background: var(--mauve);
+  color: var(--crust);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 18px 40px rgba(17,17,27,.35);
+}
+.chat-panel {
+  position: fixed;
+  right: 18px;
+  bottom: 90px;
+  z-index: 95;
+  width: min(390px, calc(100vw - 36px));
+  border: 1px solid var(--surface1);
+  border-radius: 24px;
+  background: rgba(24,24,37,.98);
+  box-shadow: var(--shadow-soft);
+  overflow:hidden;
+  display:none;
+}
+.chat-panel.open { display:block; animation: rise .22s ease both; }
+.chat-head { padding: 16px; display:flex; align-items:center; justify-content:space-between; gap: 12px; border-bottom:1px solid var(--surface0); }
+.chat-head b { display:block; }
+.chat-head span { font-family: var(--font-mono); font-size: 10px; color: var(--green); }
+.chat-close { border:0; background:transparent; cursor:pointer; color: var(--overlay2); font-size: 25px; line-height: 1; }
+.chat-body { padding: 16px; display:grid; gap: 12px; max-height: 330px; overflow:auto; }
+.msg { max-width: 86%; padding: 11px 13px; border-radius: 16px; font-size: 14px; }
+.msg.bot { background: rgba(49,50,68,.86); color: var(--subtext1); border-bottom-left-radius: 6px; }
+.msg.user { margin-left:auto; background: rgba(203,166,247,.18); color: var(--rosewater); border-bottom-right-radius: 6px; }
+.quick-replies { display:flex; flex-wrap:wrap; gap: 8px; }
+.quick-replies button { border:1px solid var(--surface1); background:transparent; color: var(--teal); border-radius:999px; padding: 7px 10px; font-family:var(--font-mono); font-size:11px; cursor:pointer; }
+.chat-form { display:flex; gap: 8px; padding: 12px; border-top:1px solid var(--surface0); }
+.chat-form input { flex:1; border:1px solid var(--surface1); border-radius: 999px; background: var(--mantle); color: var(--text); padding: 10px 13px; outline:none; }
+.chat-form button { border:0; border-radius:999px; background: var(--teal); color: var(--crust); padding: 0 14px; cursor:pointer; font-weight:700; }
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(17,17,27,.7);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  width: min(780px, 100%);
+  max-height: min(780px, 88vh);
+  overflow:auto;
+  border:1px solid var(--surface1);
+  border-radius: 28px;
+  background: var(--mantle);
+  box-shadow: var(--shadow-soft);
+}
+.modal-header { position: sticky; top: 0; display:flex; align-items:center; justify-content:space-between; gap: 18px; padding: 20px 22px; background: rgba(24,24,37,.96); border-bottom:1px solid var(--surface0); }
+.modal-header h2 { font-size: 25px; letter-spacing: -.03em; }
+.modal-close { border:0; background:transparent; color: var(--overlay2); cursor:pointer; font-size: 28px; line-height: 1; }
+.modal-content { padding: 24px 22px 26px; color: var(--subtext1); }
+.modal-content h3 { color: var(--text); margin: 22px 0 6px; }
+.modal-content p, .modal-content li { margin-bottom: 10px; }
+.modal-content ul { padding-left: 20px; }
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 110;
+  transform: translateX(-50%) translateY(18px);
+  opacity: 0;
+  pointer-events:none;
+  background: var(--green);
+  color: var(--crust);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight:700;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
+@keyframes rise { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .45s ease, transform .45s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; padding-top: 58px; min-height: auto; }
+  h1 { max-width: 9.5ch; }
+  .hero-card { min-height: auto; }
+  .grid-3, .pricing-grid { grid-template-columns: 1fr 1fr; }
+  .product-grid, .testimonials, .location-grid { grid-template-columns: 1fr; }
+  .process { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-links { justify-content:flex-start; }
+}
+@media (max-width: 780px) {
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  .mobile-menu.show { display:grid; }
+  .bar { min-height: 68px; padding-inline: 18px; }
+  .mobile-menu { inset-top: 68px; }
+  .brand small { display:none; }
+  .nav-cta { display:none; }
+  .hero { padding: 42px 18px 56px; gap: 34px; }
+  .section { padding: 60px 18px; }
+  .grid-3, .pricing-grid, .process, .stats-strip, .faq-grid { grid-template-columns: 1fr; }
+  .icon-wall { grid-template-columns: repeat(2, 1fr); }
+  .ring-grid { grid-template-columns: 1fr; justify-items: start; }
+  .hero-card { border-radius: 24px; padding: 12px; }
+  .app-frame { min-height: auto; }
+  .form-grid { grid-template-columns: 1fr; }
+  .phone { min-height: auto; }
+  .phone-screen { min-height: 600px; }
+  .chat-launcher { right: 14px; bottom: 14px; }
+  .chat-panel { right: 14px; bottom: 84px; width: calc(100vw - 28px); }
+  .cookie { left: 14px; bottom: 14px; max-width: calc(100vw - 28px); }
+}
+@media (max-width: 430px) {
+  .hero-actions .btn, .hero-actions .pill { width: 100%; }
+  .app-title { display:none; }
+  .shift-top { flex-direction:column; }
+  .footer-bottom { display:grid; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"Lunarythm",
+  "description":"A fictional Roseville-based rhythm-planning app and concierge service for night-shift healthcare workers.",
+  "address":{"@type":"PostalAddress","addressLocality":"Roseville","addressRegion":"CA","addressCountry":"US"},
+  "url":"https://example.invalid/lunarythm"
+}
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="progress" id="progress"></div>
+<header class="header" id="siteHeader">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Lunarythm home">
+      <svg class="logo-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+        <rect x="3" y="3" width="38" height="38" rx="14" fill="rgba(203,166,247,.12)" stroke="var(--surface1)"/>
+        <circle cx="22" cy="22" r="13" stroke="var(--lavender)" stroke-width="2.2"/>
+        <path d="M27 10.9c-5.8 1.8-9.8 7.2-9.8 13.3 0 3.9 1.6 7.3 4.2 9.8A12.7 12.7 0 0 1 9.8 21.4 12.9 12.9 0 0 1 27 10.9Z" fill="var(--sapphire)" opacity=".92"/>
+        <circle cx="30.5" cy="14.5" r="2.8" fill="var(--teal)"/>
+        <path d="M28 28.2 31.2 31.4 37 23.8" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      lunarythm <small>Roseville</small>
+    </a>
+    <div class="nav-wrap" aria-label="Primary navigation">
+      <nav class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Plans</a>
+        <a href="#location">Roseville</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="pill pill-primary nav-cta" href="#contact" id="navCta">Start a rhythm audit</a>
+      <button class="hamburger" id="hamburger" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#product">Product</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Plans</a>
+    <a href="#location">Roseville</a>
+    <a href="#faq">FAQ</a>
+    <a class="mobile-menu-cta" href="#contact">Start a rhythm audit</a>
+  </div>
+</header>
+<main id="main">
+  <section id="top" class="hero" aria-label="Lunarythm hero">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">circadian support for night-shift teams</span>
+      <h1><span class="lav">rest.</span><br><span class="sap">reset.</span><br><span class="tea">repeat.</span></h1>
+      <p class="hero-lede">Lunarythm is a fictional Roseville-born app and concierge service for ER nurses, travel clinicians, and overnight care teams. It translates chaotic shift rotations into sleep windows, family handoffs, low-light errands, meal timing, and gentle recovery rituals.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Build my shift rhythm</a>
+        <a class="btn btn-ghost" href="#product">Tour the app</a>
+      </div>
+      <div class="signal-row" aria-label="Service highlights">
+        <span class="badge teal">phone-first planning</span>
+        <span class="badge green">human concierge</span>
+        <span class="badge peach">family handoff cards</span>
+        <span class="badge mauve">quiet-mode automation</span>
+      </div>
+    </div>
+    <div class="hero-card reveal" aria-label="Lunarythm app preview">
+      <div class="app-frame">
+        <div class="app-top">
+          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="app-title">lunarythm.shiftboard</div>
+          <span class="badge green">synced</span>
+        </div>
+        <div class="app-body">
+          <div class="shift-panel">
+            <div class="shift-top">
+              <div>
+                <h2>Tonight’s recovery route</h2>
+                <p>Tue · 7p–7a · Sutter rotation B</p>
+              </div>
+              <span class="badge teal">low light</span>
+            </div>
+            <div class="ring-grid">
+              <div class="recovery-ring" aria-label="72 percent recovery plan complete"><div><span>72%</span><small>aligned</small></div></div>
+              <div class="check-list">
+                <div class="check"><div><b>Blue-light cutoff</b><span>starts 05:10</span></div><span>auto</span></div>
+                <div class="check"><div><b>Family handoff note</b><span>ready for 07:35</span></div><span>drafted</span></div>
+                <div class="check"><div><b>Meal window</b><span>protein + warm carbs</span></div><span>suggested</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="icon-wall">
+            <div class="ic-card sap"><svg viewBox="0 0 36 36" fill="none"><path d="M18 4v28M8 12h20M7 24h22" stroke="var(--sapphire)" stroke-width="2" stroke-linecap="round"/><rect x="6" y="7" width="24" height="24" rx="5" fill="rgba(116,199,236,.12)" stroke="var(--sapphire)" stroke-width="1.8"/></svg><span>shift map</span></div>
+            <div class="ic-card mauve"><svg viewBox="0 0 36 36" fill="none"><path d="M24 5c-7 1.9-12 8.2-12 15.6 0 4.7 2 8.9 5.2 11.8A14.5 14.5 0 1 1 24 5Z" fill="rgba(203,166,247,.16)" stroke="var(--mauve)" stroke-width="1.8"/></svg><span>sleep gate</span></div>
+            <div class="ic-card teal"><svg viewBox="0 0 36 36" fill="none"><path d="M9 27c4-10 8-15 18-18-3 10-8 15-18 18Z" fill="rgba(148,226,213,.14)" stroke="var(--teal)" stroke-width="1.8"/><path d="M12 24c4-2 8-5 12-11" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round"/></svg><span>meal timing</span></div>
+            <div class="ic-card green"><svg viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="12" fill="rgba(166,227,161,.12)" stroke="var(--green)" stroke-width="1.8"/><path d="m12 18 4 4 8-9" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>handoffs</span></div>
+            <div class="ic-card peach"><svg viewBox="0 0 36 36" fill="none"><path d="M10 10h16v20H10z" fill="rgba(250,179,135,.12)" stroke="var(--peach)" stroke-width="1.8"/><path d="M14 15h8M14 20h8M14 25h5" stroke="var(--peach)" stroke-width="1.7" stroke-linecap="round"/></svg><span>errands</span></div>
+            <div class="ic-card lav"><svg viewBox="0 0 36 36" fill="none"><path d="M6 18h7l3-7 5 14 3-7h6" stroke="var(--lavender)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="18" r="13" fill="rgba(180,190,254,.1)" stroke="var(--lavender)" stroke-width="1.4"/></svg><span>wearables</span></div>
+            <div class="ic-card pink"><svg viewBox="0 0 36 36" fill="none"><circle cx="14" cy="14" r="5" fill="rgba(245,194,231,.13)" stroke="var(--pink)" stroke-width="1.8"/><path d="M5 30c1-6 5-9 9-9s8 3 9 9" stroke="var(--pink)" stroke-width="1.8" stroke-linecap="round"/><circle cx="25" cy="13" r="3" stroke="var(--pink)" stroke-width="1.6"/></svg><span>family</span></div>
+            <div class="ic-card sky"><svg viewBox="0 0 36 36" fill="none"><path d="M12 7h12l5 8-11 14L7 15z" fill="rgba(137,220,235,.12)" stroke="var(--sky)" stroke-width="1.8"/><path d="M7 15h22M15 15l3 14 3-14" stroke="var(--sky)" stroke-width="1.6" stroke-linejoin="round"/></svg><span>focus mode</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="who">
+    <div class="section-head reveal">
+      <span class="section-kicker">the imaginary company</span>
+      <h2>A strangely specific service for people who sleep while the city is awake.</h2>
+      <p>Lunarythm combines a mobile planning app, a small Roseville-based concierge desk, and optional team programs for hospitals and clinics that want to reduce night-shift burnout without turning wellness into another portal.</p>
+    </div>
+    <div class="grid-3">
+      <article class="feature reveal">
+        <div class="feature-icon"><svg width="30" height="30" viewBox="0 0 36 36" fill="none"><path d="M18 5v26M8 14h20M7 25h22" stroke="var(--sapphire)" stroke-width="2" stroke-linecap="round"/><rect x="6" y="8" width="24" height="22" rx="5" fill="rgba(116,199,236,.12)" stroke="var(--sapphire)" stroke-width="1.8"/></svg></div>
+        <h3>For rotating clinical shifts</h3>
+        <p>Builds a rhythm plan around 12-hour nights, midweek flips, travel contracts, commute buffers, and school drop-offs.</p>
+        <div class="mini">best for // nurses · RTs · lab teams</div>
+      </article>
+      <article class="feature reveal">
+        <div class="feature-icon"><svg width="30" height="30" viewBox="0 0 36 36" fill="none"><path d="M8 28c3-9 8-15 20-20-2 12-8 17-20 20Z" fill="rgba(148,226,213,.14)" stroke="var(--teal)" stroke-width="1.8"/><path d="M12 24c5-3 9-7 13-13" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Small rituals, not lectures</h3>
+        <p>Sleep prep, hydration, food timing, decompression, quiet-home cues, and post-shift recovery are turned into doable checklists.</p>
+        <div class="mini">tone // gentle · practical · low-friction</div>
+      </article>
+      <article class="feature reveal">
+        <div class="feature-icon"><svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="8" y="8" width="20" height="20" rx="6" fill="rgba(203,166,247,.14)" stroke="var(--mauve)" stroke-width="1.8"/><path d="M14 19l3 3 6-8" stroke="var(--mauve)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Human help when life leaks in</h3>
+        <p>Members can request grocery pickup windows, “do not ring” delivery notes, school-week handoff cards, and appointment rescheduling.</p>
+        <div class="mini">service desk // 6a–10p Pacific</div>
+      </article>
+    </div>
+    <div class="stats-strip reveal" aria-label="Imaginary launch statistics">
+      <div class="stat"><strong data-count="18">0</strong><span>pilot clinics</span></div>
+      <div class="stat"><strong data-count="4100">0</strong><span>planned sleep gates</span></div>
+      <div class="stat"><strong data-count="92">0</strong><span>handoff notes / week</span></div>
+      <div class="stat"><strong data-count="4">0</strong><span>minutes to onboard</span></div>
+    </div>
+  </section>
+
+  <section class="latte-band" id="product">
+    <div class="section">
+      <div class="section-head reveal">
+        <span class="section-kicker">product tour</span>
+        <h2>Mocha at night. Latte when the sun comes back.</h2>
+        <p>The app shifts its interface to the user’s recovery window, using the board’s paired dark and light palettes as a real product behavior instead of a decorative theme.</p>
+      </div>
+      <div class="product-grid">
+        <div class="phone reveal" aria-label="Phone app mockup">
+          <div class="phone-screen">
+            <div class="phone-status">9:41 · quiet mode</div>
+            <div class="phone-header"><h3>After-shift plan</h3><span class="moon-chip">home by 07:42</span></div>
+            <div class="sleep-card"><p>Next protected sleep window</p><strong>8:30–2:10</strong><p>Porch lights dimmed, delivery holds set, family handoff scheduled for 7:58.</p></div>
+            <div class="phone-list">
+              <div class="phone-item"><div class="phone-icon" style="background:rgba(30,102,245,.1)"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><path d="M10 12h16M10 18h16M10 24h10" stroke="#1e66f5" stroke-width="2" stroke-linecap="round"/></svg></div><div><b>Handoff card</b><span>send to Mateo at 7:50</span></div><span>ready</span></div>
+              <div class="phone-item"><div class="phone-icon" style="background:rgba(23,146,153,.1)"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><path d="M8 26c5-11 11-15 20-18-2 10-8 16-20 18Z" stroke="#179299" fill="none" stroke-width="2"/><path d="M12 23c5-3 9-7 13-12" stroke="#179299" stroke-width="2" stroke-linecap="round"/></svg></div><div><b>Meal nudge</b><span>oats + eggs before sleep</span></div><span>08:05</span></div>
+              <div class="phone-item"><div class="phone-icon" style="background:rgba(136,57,239,.1)"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><path d="M25 7c-7 2-12 8-12 15 0 4 2 8 5 10A14 14 0 1 1 25 7Z" stroke="#8839ef" fill="none" stroke-width="2"/></svg></div><div><b>Room cue</b><span>fan on, shades down</span></div><span>auto</span></div>
+              <div class="phone-item"><div class="phone-icon" style="background:rgba(64,160,43,.1)"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><path d="m10 18 5 5 11-12" stroke="#40a02b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><b>Concierge</b><span>pharmacy pickup held</span></div><span>done</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="product-copy">
+          <article class="module-card reveal"><div class="feature-icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="13" stroke="var(--latte-lavender)" stroke-width="2"/><path d="M18 9v9l6 4" stroke="var(--latte-lavender)" stroke-width="2" stroke-linecap="round"/></svg></div><div><h3>Rhythm builder</h3><p>Imports shift blocks, commute times, household obligations, and preferred sleep windows to create a repeatable plan.</p></div></article>
+          <article class="module-card reveal"><div class="feature-icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none"><path d="M6 18h24M18 6v24" stroke="var(--latte-teal)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="18" r="10" stroke="var(--latte-teal)" stroke-width="2"/></svg></div><div><h3>Home signal automations</h3><p>Coordinates quiet hours, smart lights, doorbell rules, and delivery notes so rest does not depend on everyone remembering.</p></div></article>
+          <article class="module-card reveal"><div class="feature-icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none"><path d="M8 10h20v18H8z" stroke="var(--latte-peach)" stroke-width="2"/><path d="M12 15h12M12 20h12M12 25h7" stroke="var(--latte-peach)" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h3>Family handoff cards</h3><p>Creates plain-language “what I need after shift” notes for partners, parents, roommates, and caregivers.</p></div></article>
+          <article class="module-card reveal"><div class="feature-icon"><svg width="28" height="28" viewBox="0 0 36 36" fill="none"><path d="M18 5 7 10v8c0 7 5 12 11 14 6-2 11-7 11-14v-8Z" stroke="var(--latte-green)" stroke-width="2"/><path d="m13 19 3 3 7-8" stroke="var(--latte-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h3>Team-safe reporting</h3><p>Employers see aggregate adoption and schedule friction patterns only. Members control personal routine details.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="section-head reveal">
+      <span class="section-kicker">how it works</span>
+      <h2>Designed to feel like relief, not another compliance module.</h2>
+      <p>Each member gets a plan that acknowledges real life: kids, roommates, pets, commuting, grocery windows, alert fatigue, and the hard emotional gear-shift after a critical night.</p>
+    </div>
+    <div class="process">
+      <article class="step reveal"><h3>Import the rotation</h3><p>Connect a work calendar, screenshot a schedule, or enter a repeating pattern. Lunarythm labels the recovery pinch points.</p></article>
+      <article class="step reveal"><h3>Set the household rules</h3><p>Add quiet hours, family notifications, commute buffers, caffeine cutoffs, meals, and “please don’t ask me before noon” windows.</p></article>
+      <article class="step reveal"><h3>Activate the night kit</h3><p>Turn on low-light reminders, smart-home cues, delivery holds, handoff notes, and optional concierge errands.</p></article>
+      <article class="step reveal"><h3>Review the rhythm</h3><p>Every two weeks, the plan adapts around missed sleep windows, stressful handoffs, and upcoming schedule flips.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="section-head reveal">
+      <span class="section-kicker">imaginary plans</span>
+      <h2>Simple pricing for individuals, households, and teams.</h2>
+      <p>These prices are made up for the concept site, but the tiers are written like a real 2026 product page.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="price-card reveal"><h3>Solo</h3><p>For one night-shift worker building a routine around real life.</p><div class="price">$14<small>/mo</small></div><ul><li>Shift rhythm planner</li><li>Sleep gate reminders</li><li>3 family handoff cards</li><li>Wearable-friendly exports</li></ul><a href="#contact" class="btn btn-outline">Choose Solo</a></article>
+      <article class="price-card popular reveal"><span class="ribbon">Most humane</span><h3>Household</h3><p>For partners, roommates, caregivers, and families coordinating around rest.</p><div class="price">$29<small>/mo</small></div><ul><li>Everything in Solo</li><li>Shared quiet-mode calendar</li><li>Unlimited handoff cards</li><li>Delivery and errand notes</li><li>Concierge chat support</li></ul><a href="#contact" class="btn btn-primary">Choose Household</a></article>
+      <article class="price-card reveal"><h3>Team</h3><p>For departments that want healthier rotations without reading personal data.</p><div class="price">Custom</div><ul><li>Aggregate friction reports</li><li>Team onboarding sessions</li><li>Manager playbooks</li><li>Private member routines</li></ul><a href="#contact" class="btn btn-ghost">Talk to us</a></article>
+    </div>
+  </section>
+
+  <section class="section" id="proof">
+    <div class="testimonials">
+      <article class="quote-card reveal">
+        <span class="section-kicker">imaginary testimonial</span>
+        <blockquote>“It didn’t tell me to meditate. It made my house stop behaving like it was 3 p.m. when my body thought it was midnight.”</blockquote>
+        <cite>— Mara L., fictional NICU nurse, Sacramento metro</cite>
+      </article>
+      <div class="review-list">
+        <article class="review reveal"><p>“The family handoff card saved us from the same conversation every morning.”</p><b>Travel RT · 13-week contract</b></article>
+        <article class="review reveal"><p>“We piloted it with a small overnight team and finally saw where the schedule was hurting people.”</p><b>Clinic operations director</b></article>
+        <article class="review reveal"><p>“The concierge moved my dentist appointment twice without making me call after a shift.”</p><b>Emergency department RN</b></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="location">
+    <div class="section-head reveal">
+      <span class="section-kicker">Roseville, California</span>
+      <h2>Built from a quiet office near the edge of the shift-change corridor.</h2>
+      <p>The address below is fictional. The embedded map intentionally points to Roseville, CA as requested.</p>
+    </div>
+    <div class="location-grid">
+      <aside class="location-card reveal">
+        <h3>Visit the Lunarythm studio</h3>
+        <div class="address-line"><svg width="26" height="26" viewBox="0 0 36 36" fill="none"><path d="M18 32s11-9 11-18A11 11 0 1 0 7 14c0 9 11 18 11 18Z" fill="rgba(203,166,247,.13)" stroke="var(--mauve)" stroke-width="2"/><circle cx="18" cy="14" r="4" stroke="var(--mauve)" stroke-width="2"/></svg><div><b>204 Grove Orbit, Suite 2A</b><br>Roseville, CA 95678</div></div>
+        <p style="color:var(--subtext0)">Members can book a 20-minute rhythm audit online or meet with the concierge desk for schedule setup, household rules, and quiet-home automation planning.</p>
+        <div class="hours"><div><b>Mon–Thu</b><span>6:00a–10:00p</span></div><div><b>Friday</b><span>6:00a–6:00p</span></div><div><b>Weekend</b><span>chat only</span></div></div>
+      </aside>
+      <div class="map-card reveal" aria-label="Map showing Roseville, California">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Map showing Roseville, California" src="https://www.google.com/maps?q=Roseville%2C%20CA&output=embed"></iframe>
+      </div>
+    </div>
+    <div class="contact-card reveal" id="contact">
+      <div class="section-head" style="margin-bottom:20px"><span class="section-kicker">cta</span><h2 style="font-size:clamp(2rem,4vw,3.1rem)">Start with a rhythm audit.</h2><p>Send a few details and the fictional Lunarythm team will suggest a first-week recovery plan. The form is local-only in this demo.</p></div>
+      <form id="leadForm" class="form-grid">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required placeholder="Jordan Vale"></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+        <div class="field"><label for="role">I am a</label><select id="role" name="role"><option>Night-shift clinician</option><option>Household member</option><option>Team manager</option><option>Curious designer</option></select></div>
+        <div class="field"><label for="rotation">Current rhythm</label><select id="rotation" name="rotation"><option>3 x 12 nights</option><option>4 x 10 nights</option><option>Rotating days/nights</option><option>Travel contract</option></select></div>
+        <div class="field full"><label for="note">What keeps interrupting rest?</label><textarea id="note" name="note" placeholder="Doorbell, school pickup, commute, caffeine timing, roommates, appointment calls..."></textarea></div>
+        <div class="field full"><button class="btn btn-primary" type="submit">Request my rhythm audit</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="section-head reveal">
+      <span class="section-kicker">faq</span>
+      <h2>Questions a real buyer might ask.</h2>
+    </div>
+    <div class="faq-grid">
+      <details class="reveal"><summary>Is Lunarythm medical advice?</summary><p>No. In this fictional concept, Lunarythm offers planning, reminders, household coordination, and concierge support. It does not diagnose, treat, or replace clinician guidance.</p></details>
+      <details class="reveal"><summary>Does my employer see my sleep details?</summary><p>No. Team plans receive aggregate patterns such as adoption, common friction windows, and schedule pressure. Individual routines stay private unless the member shares them.</p></details>
+      <details class="reveal"><summary>Why this palette?</summary><p>The dark Mocha colors make the product feel native to night work, while Latte sections make product explanations feel clear and daylight-friendly.</p></details>
+      <details class="reveal"><summary>Does the website work on iPhone?</summary><p>Yes. The layout collapses to one column, the navigation becomes a hamburger menu, tap targets remain large, and the CTA appears only after scrolling past the hero.</p></details>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a class="brand" href="#top" aria-label="Lunarythm home">
+        <svg class="logo-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true"><rect x="3" y="3" width="38" height="38" rx="14" fill="rgba(203,166,247,.12)" stroke="var(--surface1)"/><circle cx="22" cy="22" r="13" stroke="var(--lavender)" stroke-width="2.2"/><path d="M27 10.9c-5.8 1.8-9.8 7.2-9.8 13.3 0 3.9 1.6 7.3 4.2 9.8A12.7 12.7 0 0 1 9.8 21.4 12.9 12.9 0 0 1 27 10.9Z" fill="var(--sapphire)" opacity=".92"/><circle cx="30.5" cy="14.5" r="2.8" fill="var(--teal)"/><path d="M28 28.2 31.2 31.4 37 23.8" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        lunarythm
+      </a>
+      <p>Fictional product concept, complete responsive site, and original content created from the supplied style board. Not a real health service.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#product">Product</a>
+      <a href="#pricing">Plans</a>
+      <a href="#location">Location</a>
+      <button type="button" data-modal="privacy">Privacy Policy</button>
+      <button type="button" data-modal="terms">Terms &amp; Conditions</button>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Lunarythm Studio, fictional. Roseville, CA.</span><span>DM Sans · DM Mono · Mocha + Latte · semantic pastels</span></div>
+</footer>
+
+<div class="cookie" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+  <b>Cookie note</b>
+  <p>This fictional demo uses local storage for theme, cookie preference, and tiny UI interactions. The message also fades out by itself after 4 seconds.</p>
+  <div class="cookie-actions"><button class="pill pill-primary" id="acceptCookies" type="button">Accept</button><button class="pill" id="declineCookies" type="button">Decline</button></div>
+</div>
+
+<button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open web chat" aria-controls="chatPanel" aria-expanded="false">
+  <svg width="27" height="27" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M7 9h22a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H16l-7 5v-5H7a3 3 0 0 1-3-3V12a3 3 0 0 1 3-3Z" fill="currentColor" opacity=".18" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="18" r="1.7" fill="currentColor"/><circle cx="18" cy="18" r="1.7" fill="currentColor"/><circle cx="23" cy="18" r="1.7" fill="currentColor"/></svg>
+</button>
+<section class="chat-panel" id="chatPanel" aria-label="Web chat panel">
+  <div class="chat-head"><div><b>Lunarythm concierge</b><span>online for demo</span></div><button class="chat-close" id="chatClose" type="button" aria-label="Close chat">×</button></div>
+  <div class="chat-body" id="chatBody">
+    <div class="msg bot">Hi — I’m the fictional concierge. Want help choosing a plan or testing the form?</div>
+    <div class="quick-replies"><button type="button">I work nights</button><button type="button">For my team</button><button type="button">What is this?</button></div>
+  </div>
+  <form class="chat-form" id="chatForm"><input id="chatInput" aria-label="Chat message" placeholder="Type a message..." autocomplete="off"><button type="submit">Send</button></form>
+</section>
+
+<div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+  <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header"><h2 id="modalTitle">Policy</h2><button class="modal-close" id="modalClose" type="button" aria-label="Close modal">×</button></div>
+    <div class="modal-content" id="modalContent"></div>
+  </article>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Saved in this browser demo.</div>
+
+<script>
+(() => {
+  const $ = (sel, parent = document) => parent.querySelector(sel);
+  const $$ = (sel, parent = document) => Array.from(parent.querySelectorAll(sel));
+  const header = $('#siteHeader');
+  const progress = $('#progress');
+  const hero = $('#top');
+  const hamburger = $('#hamburger');
+  const mobileMenu = $('#mobileMenu');
+  const toast = $('#toast');
+
+  function showToast(message = 'Saved in this browser demo.') {
+    toast.textContent = message;
+    toast.classList.add('show');
+    window.setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function closeMenu() {
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('show');
+    document.body.classList.remove('menu-open');
+  }
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', String(!isOpen));
+    mobileMenu.classList.toggle('show', !isOpen);
+    document.body.classList.toggle('menu-open', !isOpen);
+  });
+  $$('#mobileMenu a').forEach(link => link.addEventListener('click', closeMenu));
+
+  function updateProgress() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = max > 0 ? `${Math.min(100, (scrollTop / max) * 100)}%` : '0%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  const heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => header.classList.toggle('scrolled', !entry.isIntersecting));
+  }, { threshold: 0.08 });
+  heroObserver.observe(hero);
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  $$('.reveal').forEach(el => revealObserver.observe(el));
+
+  const stats = $$('.stat strong[data-count]');
+  const statObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = Number(el.dataset.count);
+      const duration = 850;
+      const start = performance.now();
+      function tick(now) {
+        const pct = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - pct, 3);
+        el.textContent = Math.round(target * eased).toLocaleString();
+        if (pct < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  stats.forEach(stat => statObserver.observe(stat));
+
+  const cookie = $('#cookieBanner');
+  const accept = $('#acceptCookies');
+  const decline = $('#declineCookies');
+  function hideCookie(choice) {
+    cookie.classList.remove('show');
+    if (choice) localStorage.setItem('lunarythmCookieChoice', choice);
+  }
+  if (!localStorage.getItem('lunarythmCookieChoice')) {
+    window.setTimeout(() => cookie.classList.add('show'), 700);
+    window.setTimeout(() => hideCookie('auto-dismissed'), 4700);
+  }
+  accept.addEventListener('click', () => { hideCookie('accepted'); showToast('Cookie preference accepted.'); });
+  decline.addEventListener('click', () => { hideCookie('declined'); showToast('Cookie preference declined.'); });
+
+  const chatLauncher = $('#chatLauncher');
+  const chatPanel = $('#chatPanel');
+  const chatClose = $('#chatClose');
+  const chatBody = $('#chatBody');
+  const chatForm = $('#chatForm');
+  const chatInput = $('#chatInput');
+  function toggleChat(force) {
+    const open = force ?? !chatPanel.classList.contains('open');
+    chatPanel.classList.toggle('open', open);
+    chatLauncher.setAttribute('aria-expanded', String(open));
+    if (open) setTimeout(() => chatInput.focus(), 120);
+  }
+  chatLauncher.addEventListener('click', () => toggleChat());
+  chatClose.addEventListener('click', () => toggleChat(false));
+  function addMsg(text, who = 'bot') {
+    const msg = document.createElement('div');
+    msg.className = `msg ${who}`;
+    msg.textContent = text;
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  $$('.quick-replies button').forEach(btn => btn.addEventListener('click', () => {
+    addMsg(btn.textContent, 'user');
+    setTimeout(() => addMsg('Great. In a real build, this would route to a human or open the rhythm audit flow. For this demo, try the contact form.'), 450);
+  }));
+  chatForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addMsg(text, 'user');
+    chatInput.value = '';
+    setTimeout(() => addMsg('Thanks — I saved that to the local demo chat only. A production version would connect to your CRM or support inbox.'), 520);
+  });
+
+  $('#leadForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+    localStorage.setItem('lunarythmLeadDemo', JSON.stringify({ ...data, savedAt: new Date().toISOString() }));
+    showToast('Rhythm audit request saved locally.');
+    event.currentTarget.reset();
+  });
+
+  const modalOverlay = $('#modalOverlay');
+  const modalTitle = $('#modalTitle');
+  const modalContent = $('#modalContent');
+  const modalClose = $('#modalClose');
+  const policies = {
+    privacy: {
+      title: 'Privacy Policy',
+      html: `<p><strong>Effective date:</strong> June 19, 2026. This is fictional placeholder copy for the Lunarythm demo site.</p><h3>What we collect</h3><p>In a real service, Lunarythm would collect account details, shift preferences, household rules, concierge requests, and support conversations needed to provide rhythm planning.</p><h3>What employers see</h3><p>Team customers would receive aggregate adoption and scheduling friction insights. Individual sleep windows, family notes, and concierge requests would remain private unless a member chooses to share them.</p><h3>Cookies and storage</h3><p>This demo uses browser local storage to remember cookie preference, form-demo data, and interface state. It does not send data to a server.</p><h3>Your choices</h3><ul><li>Request export or deletion of your account data.</li><li>Disable optional integrations.</li><li>Use the service without employer-visible personal routine details.</li></ul>`
+    },
+    terms: {
+      title: 'Terms & Conditions',
+      html: `<p><strong>Effective date:</strong> June 19, 2026. These terms are fictional and included to complete the website concept.</p><h3>Service role</h3><p>Lunarythm is imagined as a planning and coordination service. It is not medical advice, clinical care, therapy, or emergency support.</p><h3>Member responsibility</h3><p>Members are responsible for confirming schedules, professional obligations, safety requirements, and any health guidance with qualified professionals.</p><h3>Concierge limits</h3><p>Concierge tasks would be limited to routine coordination such as appointment reminders, pickup windows, delivery notes, and household handoff templates.</p><h3>Demo status</h3><p>This page is a static design prototype. No account is created, no payment is collected, and no real support service is provided.</p>`
+    }
+  };
+  function openModal(type) {
+    modalTitle.textContent = policies[type].title;
+    modalContent.innerHTML = policies[type].html;
+    modalOverlay.classList.add('open');
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    modalClose.focus();
+  }
+  function closeModal() {
+    modalOverlay.classList.remove('open');
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+  $$('[data-modal]').forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.modal)));
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', event => { if (event.target === modalOverlay) closeModal(); });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { closeMenu(); closeModal(); toggleChat(false); }
+  });
+})();
+</script>
+</body>
+</html>
